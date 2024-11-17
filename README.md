@@ -47,7 +47,7 @@ rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
 ```bash
 sudo cp /home/user/.ssh/authorized_keys /root/.ssh/authorized_keys
 sudo echo "elevator=deadline cgroup_memory=1 cgroup_enable=memory" >> /boot/firmware/cmdline.txt # Only on raspberry pi
-apt install jq curl -y
+apt install jq curl open-iscsi -y
 reboot
 ```
 ## Deploying HA k3s cluster
