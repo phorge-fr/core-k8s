@@ -124,3 +124,11 @@ sleep 10
 kubectl label nodes $(kubectl get nodes -o=custom-columns=NAME:.metadata.name --no-headers) bgp-policy=default
 kubectl apply -f setup/cilium/pool.yaml
 ```
+
+# Setup fluxcd
+
+Once everything is up:
+
+```bash
+flux bootstrap github --owner=phorge-fr --repository=core-k8s --branch=main --path=cluster/core
+```
