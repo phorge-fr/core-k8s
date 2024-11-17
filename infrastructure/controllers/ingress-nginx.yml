@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: ingress-nginx
 ---
-apiVersion: source.toolkit.fluxcd.io/v1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: ingress-nginx
