@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: authentik
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1655antr9guh6h0jrq7wf4yrfxk0r9rkqwfxqvu9mqyrt0cxqacksc8kfz0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkWGU3c0pKQTZHUGpsQnY4
+            cklrWm9KWGE1OWNvUFp2RlhjakxRY281QmlnCnB2emdNelBsSGlNQjM5TVh2ajNj
+            a1RpcXRpQUp4b0pUWEwyc0MxMkNsRU0KLS0tIHBsQlprTGFaSmZHLzZtZ3FOTHFB
+            MGhhUy9rWXhHN0xBRzlYcmZiS3ZXU2sKbY4vn/6WZNrDald0FaKuQy3zMetVV5Mn
+            xcfxSdM3zR27IdVyK10AhAPGgrGOGEDeMpIe505lojJDpD6PtbunLg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-22T20:20:27Z"
+    mac: ENC[AES256_GCM,data:2bkwmmsgEQBc1BpeYrcCN5eERVHhnWAGfRwydDIyzHWCmj3RYIXDj7q0oCowgVb3nBrBx/2OTAme/B45MP7wjadR+viT6RgflfPS8xthgwYHLq0eJoAovA9/zzQ6PyHnRPlL76K1WIgZk35JWxI6Tuv+rMgUMBrY646N6v1ANok=,iv:BT9EsUBaKJP3VcVsHTq2p4nwXeSSq0tE9ISXbcPflHE=,tag:r6RuwnkYahfYQqfLfw/ahA==,type:str]
+    pgp: []
+    encrypted_regex: ^(password|secret_key)$
+    version: 3.9.1
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+    name: authentik
+    namespace: authentik
+spec:
+    interval: 24h
+    url: https://charts.goauthentik.io
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1655antr9guh6h0jrq7wf4yrfxk0r9rkqwfxqvu9mqyrt0cxqacksc8kfz0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkWGU3c0pKQTZHUGpsQnY4
+            cklrWm9KWGE1OWNvUFp2RlhjakxRY281QmlnCnB2emdNelBsSGlNQjM5TVh2ajNj
+            a1RpcXRpQUp4b0pUWEwyc0MxMkNsRU0KLS0tIHBsQlprTGFaSmZHLzZtZ3FOTHFB
+            MGhhUy9rWXhHN0xBRzlYcmZiS3ZXU2sKbY4vn/6WZNrDald0FaKuQy3zMetVV5Mn
+            xcfxSdM3zR27IdVyK10AhAPGgrGOGEDeMpIe505lojJDpD6PtbunLg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-22T20:20:27Z"
+    mac: ENC[AES256_GCM,data:2bkwmmsgEQBc1BpeYrcCN5eERVHhnWAGfRwydDIyzHWCmj3RYIXDj7q0oCowgVb3nBrBx/2OTAme/B45MP7wjadR+viT6RgflfPS8xthgwYHLq0eJoAovA9/zzQ6PyHnRPlL76K1WIgZk35JWxI6Tuv+rMgUMBrY646N6v1ANok=,iv:BT9EsUBaKJP3VcVsHTq2p4nwXeSSq0tE9ISXbcPflHE=,tag:r6RuwnkYahfYQqfLfw/ahA==,type:str]
+    pgp: []
+    encrypted_regex: ^(password|secret_key)$
+    version: 3.9.1
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+    name: authentik
+    namespace: authentik
+spec:
+    interval: 30m
+    chart:
+        spec:
+            chart: authentik
+            version: '*'
+            sourceRef:
+                kind: HelmRepository
+                name: authentik
+                namespace: authentik
+            interval: 12h
+    values:
+        authentik:
+            secret_key: ENC[AES256_GCM,data:b7mQFiVHDjjTJY73t6Uiw3//RjmShjwoopAb9az2ukkOQOmL9s50N/lUlLmNzbnW0YQT5+YIsorIRIfhZpE+zs6jltGTHe/WlE15ePRsrx0=,iv:ZzZPWuVayY3Zs8740Z+BWVXa5VV/0t6S7boJZg1B0Os=,tag:Eyh+BkCJTNgB+Tu/cUxuEA==,type:str]
+            error_reporting:
+                enabled: false
+            postgresql:
+                password: ENC[AES256_GCM,data:NyiN7UUrAeURcRocQng9DscoF9Xb7Kn+0yReyfdcvLhcIVYJFaxpm8La4WWF4CmzBbqxZiYHeHRAfZqeBSKn3ICyCiGIH+SYlWv2PdJhwRU=,iv:M/1KeTR8fH1T9m8beaE/TSkxZei3Eac7sYzeIj3jbDQ=,tag:Ada1Mrkw1bd9ugQeMx6zCw==,type:str]
+        server:
+            ingress:
+                ingressClassName: nginx
+                annotations:
+                    cert-manager.io/cluster-issuer: letsencrypt
+                enabled: true
+                hosts:
+                    - auth.phorge.fr
+                tls:
+                    - secretName: authentik-tls
+                      hosts:
+                        - auth.phorge.fr
+        postgresql:
+            enabled: true
+            auth:
+                password: ENC[AES256_GCM,data:5jXdwhBjJ6r9uJcWKQ86+lOYF3mmN/kC5L+cTRY/zgK0I8APYD6wCgVW4npdjsqsht1QbSXQScBwIQ56maR7vjb+IGNMue3GWZ/eGqTHzFc=,iv:1/wUpDSpNAfjFDzYcRED9pmHyAGKKSHfMsyiHeRNCYU=,tag:qa8C5Yq23G57wWyHZJs5zA==,type:str]
+        redis:
+            enabled: true
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1655antr9guh6h0jrq7wf4yrfxk0r9rkqwfxqvu9mqyrt0cxqacksc8kfz0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkWGU3c0pKQTZHUGpsQnY4
+            cklrWm9KWGE1OWNvUFp2RlhjakxRY281QmlnCnB2emdNelBsSGlNQjM5TVh2ajNj
+            a1RpcXRpQUp4b0pUWEwyc0MxMkNsRU0KLS0tIHBsQlprTGFaSmZHLzZtZ3FOTHFB
+            MGhhUy9rWXhHN0xBRzlYcmZiS3ZXU2sKbY4vn/6WZNrDald0FaKuQy3zMetVV5Mn
+            xcfxSdM3zR27IdVyK10AhAPGgrGOGEDeMpIe505lojJDpD6PtbunLg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-22T20:20:27Z"
+    mac: ENC[AES256_GCM,data:2bkwmmsgEQBc1BpeYrcCN5eERVHhnWAGfRwydDIyzHWCmj3RYIXDj7q0oCowgVb3nBrBx/2OTAme/B45MP7wjadR+viT6RgflfPS8xthgwYHLq0eJoAovA9/zzQ6PyHnRPlL76K1WIgZk35JWxI6Tuv+rMgUMBrY646N6v1ANok=,iv:BT9EsUBaKJP3VcVsHTq2p4nwXeSSq0tE9ISXbcPflHE=,tag:r6RuwnkYahfYQqfLfw/ahA==,type:str]
+    pgp: []
+    encrypted_regex: ^(password|secret_key)$
+    version: 3.9.1
