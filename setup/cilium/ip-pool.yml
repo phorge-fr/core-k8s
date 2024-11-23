@@ -4,5 +4,5 @@ metadata:
   name: "external"
 spec:
   blocks:
-  -  start:  "10.1.2.10"
-     stop:  "10.1.2.250"
+  -  start:  "10.1.1.10"
+     stop:  "10.1.1.250"
