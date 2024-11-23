@@ -63,7 +63,7 @@ k3sup install --sudo=false \
     --print-command
 
 mkdir -p ~/.kube/
-cat kubeconfig > .kube/config
+cat kubeconfig > ~/.kube/config
 ```
 
 On the 1st Node (10.1.0.1):
@@ -119,10 +119,10 @@ sleep 20
 pod=$(kubectl get pods -n kube-system -o name | grep cilium-operator)
 kubectl delete -n kube-system $pod
 sleep 60
-kubectl apply -f setup/cilium/bgp.yaml
+kubectl apply -f setup/cilium/peering-policy.yml
 sleep 10
 kubectl label nodes $(kubectl get nodes -o=custom-columns=NAME:.metadata.name --no-headers) bgp-policy=default
-kubectl apply -f setup/cilium/pool.yaml
+kubectl apply -f setup/cilium/ip-pool.yml
 ```
 
 # Setup fluxcd
