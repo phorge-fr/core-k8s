@@ -1,4 +1,4 @@
 creation_rules:
   - path_regex: .*.yml
     encrypted_regex: ^(password|secret_key)$
-    age: age1655antr9guh6h0jrq7wf4yrfxk0r9rkqwfxqvu9mqyrt0cxqacksc8kfz0
+    age: age1655antr9guh6h0jrq7wf4yrfxk0r9rkqwfxqvu9mqyrt0cxqacksc8kfz0,age12qyc73ua4t9qf840umss3nzpnktl9fyk4y9qfhj5cqnrwnw0yqxqtd6jzv
