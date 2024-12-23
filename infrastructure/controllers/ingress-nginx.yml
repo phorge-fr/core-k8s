@@ -33,5 +33,7 @@ spec:
     controller:
       service:
         type: "LoadBalancer"
+      config:
+        enable-ssl-passthrough: "true"
     admissionWebhooks:
       enabled: false
