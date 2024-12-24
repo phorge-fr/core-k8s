@@ -32,8 +32,6 @@ spec:
   values:
     controller:
       service:
-        type: "LoadBalancer"
-      config:
-        enable-ssl-passthrough: "true"
+        type: "ClusterIP" # Frontal RP/LP redirects to ingress if no rules are matching
     admissionWebhooks:
       enabled: false
