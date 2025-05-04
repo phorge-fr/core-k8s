@@ -4,3 +4,5 @@ resources:
   - cert-manager.yml
   - ingress-nginx.yml
   - longhorn.yml
+  - system-upgrade-controller.yml
+  - front-rplb.yml
